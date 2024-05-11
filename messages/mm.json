@@ -1,0 +1,9 @@
+{
+  "home": {
+    "title": "မင်္ဂလာပါ"
+  },
+  "LocaleSwitcher": {
+    "label": "🇺🇸 English",
+    "locale": "{locale, select, mm {🇲🇲 မြန်မာ} en {🇺🇸 အင်္ဂလိပ်} other {Unknown}}"
+  }
+}

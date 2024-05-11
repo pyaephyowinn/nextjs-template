@@ -1,0 +1,9 @@
+{
+  "home": {
+    "title": "Hello"
+  },
+  "LocaleSwitcher": {
+    "label": "🇲🇲 Myanmar",
+    "locale": "{locale, select, mm {🇲🇲 Myanmar} en {🇺🇸 English} other {Unknown}}"
+  }
+}

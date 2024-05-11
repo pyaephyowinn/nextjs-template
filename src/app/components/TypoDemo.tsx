@@ -1,8 +1,12 @@
+import { useTranslations } from 'next-intl';
+
 export function TypographyDemo() {
+  const t = useTranslations('home');
+
   return (
     <div>
       <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl'>
-        The Joke Tax Chronicles
+        {t('title')}
       </h1>
       <p className='leading-7 [&:not(:first-child)]:mt-6'>
         Once upon a time, in a far-off land, there was a very lazy king who
