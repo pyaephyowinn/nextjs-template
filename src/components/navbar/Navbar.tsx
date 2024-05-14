@@ -13,6 +13,20 @@ export function Navbar() {
           <LocaleSwitcher />
 
           <Link
+            href='employer/profile'
+            className='h-10 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:bg-gray-700'
+          >
+            Employer Profile
+          </Link>
+
+          <Link
+            href='/job-seeker/profile'
+            className='h-10 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:bg-gray-700'
+          >
+            Job Seeker Profile
+          </Link>
+
+          <Link
             href='/login'
             className='h-10 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:bg-gray-700'
           >

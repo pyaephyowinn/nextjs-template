@@ -1,23 +1,28 @@
 import createIntlMiddleware from 'next-intl/middleware';
 import { NextRequest } from 'next/server';
-import { DEFAULT_LOCALE, localePrefix, locales, pathnames } from './config';
+import { DEFAULT_LOCALE, localePrefix, locales } from './config';
 
 export default async function middleware(request: NextRequest) {
+  const [, locale, ...segments] = request.nextUrl.pathname.split('/');
+  console.log('locale', locale);
+  console.log('locale', segments.join('/'));
+
   // Step 1: Use the incoming request (example)
-  const defaultLocale =
-    request.headers.get('x-your-custom-locale') || DEFAULT_LOCALE;
+  const defaultLocale = request.headers.get('x-intl-locale') || DEFAULT_LOCALE;
 
   // Step 2: Create and call the next-intl middleware (example)
   const handleI18nRouting = createIntlMiddleware({
     locales,
     defaultLocale,
-    pathnames,
     localePrefix,
+    pathnames: {
+      '/': '/',
+    },
   });
   const response = handleI18nRouting(request);
 
   // Step 3: Alter the response (example)
-  response.headers.set('x-your-custom-locale', defaultLocale);
+  response.headers.set('x-intl-locale', defaultLocale);
 
   return response;
 }
