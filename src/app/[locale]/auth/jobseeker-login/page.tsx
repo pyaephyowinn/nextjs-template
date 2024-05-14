@@ -1,9 +1,20 @@
+'use client';
+
+import { setAuthSession } from '@/app/utils/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Link } from '@/navigation';
 
 export default function Login() {
+  const handleLogin = () => {
+    setAuthSession({
+      username: 'alice',
+      role: 'employer',
+      token: 'jwt12345',
+    });
+  };
+
   return (
     <div className='w-full lg:grid lg:grid-cols-2 h-screen'>
       <div className='absolute left-4 top-4'>
@@ -12,10 +23,13 @@ export default function Login() {
         </Link>
       </div>
 
-      <div className='flex items-center justify-center py-12'>
+      <div
+        onClick={handleLogin}
+        className='flex items-center justify-center py-12'
+      >
         <div className='mx-auto grid w-[350px] gap-6'>
           <div className='grid gap-2 text-center'>
-            <h1 className='text-3xl font-bold'>Login</h1>
+            <h1 className='text-3xl font-bold'>Job Seeker Login</h1>
             <p className='text-balance text-muted-foreground'>
               Enter your email below to login to your account
             </p>

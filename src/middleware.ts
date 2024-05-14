@@ -1,25 +1,49 @@
+import {
+  AUTH_COOKIE_NAME,
+  authedEmployerPages,
+  authedJobSeekerPages,
+  employerLoginPage,
+  intlCookieHeader,
+  jobSeekerLoginPage,
+} from '@/config';
 import createIntlMiddleware from 'next-intl/middleware';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { DEFAULT_LOCALE, localePrefix, locales } from './config';
 
 export default async function middleware(request: NextRequest) {
   const [, locale, ...segments] = request.nextUrl.pathname.split('/');
-  console.log('locale', locale);
-  console.log('locale', segments.join('/'));
+  const pathname = segments.join('/');
 
-  // Step 1: Use the incoming request (example)
-  const defaultLocale = request.headers.get('x-intl-locale') || DEFAULT_LOCALE;
+  const isEmployerPages = authedEmployerPages.includes(pathname);
+  const isJobSeekerPages = authedJobSeekerPages.includes(pathname);
 
-  // Step 2: Create and call the next-intl middleware (example)
+  const auth = (() => {
+    const authCookieValue = request.cookies.get(AUTH_COOKIE_NAME)?.value;
+    if (authCookieValue) return JSON.parse(authCookieValue);
+    return null;
+  })();
+
+  const isAuthenticatedEmployer = auth && auth.role === 'employer';
+  const isAuthenticatedJobSeeker = auth && auth.role === 'job-seeker';
+
+  if (
+    (isEmployerPages && !isAuthenticatedEmployer) ||
+    (isJobSeekerPages && !isAuthenticatedJobSeeker)
+  ) {
+    const loginUrl = isEmployerPages ? employerLoginPage : jobSeekerLoginPage;
+    const redirectUrl = new URL(`/${locale}/${loginUrl}`, request.url);
+    redirectUrl.searchParams.set('callbackUrl', request.url);
+    return NextResponse.redirect(redirectUrl);
+  }
+
+  const defaultLocale = request.headers.get(intlCookieHeader) || DEFAULT_LOCALE;
   const handleI18nRouting = createIntlMiddleware({
     locales,
     defaultLocale,
     localePrefix,
   });
   const response = handleI18nRouting(request);
-
-  // Step 3: Alter the response (example)
-  response.headers.set('x-intl-locale', defaultLocale);
+  response.headers.set(intlCookieHeader, defaultLocale);
 
   return response;
 }
