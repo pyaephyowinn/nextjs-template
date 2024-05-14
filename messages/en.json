@@ -4,6 +4,6 @@
   },
   "LocaleSwitcher": {
     "label": "🇲🇲 Myanmar",
-    "locale": "{locale, select, mm {🇲🇲 Myanmar} en {🇺🇸 English} other {Unknown}}"
+    "locale": "{locale, select, my {🇲🇲 Myanmar} en {🇺🇸 English} other {Unknown}}"
   }
 }

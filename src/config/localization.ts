@@ -2,7 +2,7 @@ import { Pathnames } from 'next-intl/navigation';
 import { employerPagesPrefix, jobSeekerPagesPrefix } from './auth';
 
 export const DEFAULT_LOCALE = 'en',
-  locales = ['en', 'mm'],
+  locales = ['en', 'my'],
   localePrefix = 'always';
 
 export const login = 'login',
