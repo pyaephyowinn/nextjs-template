@@ -1,11 +1,11 @@
 'use client';
 
-import { getAuthSession, removeAuthSession } from '@/app/utils/auth';
+import { useAuthSession } from '@/hooks/useAuthSession';
 import { Link } from '@/navigation';
 import LocaleSwitcher from './LocalSwitcher';
 
 export function Navbar() {
-  const auth = getAuthSession();
+  const { session, removeAuth } = useAuthSession();
 
   return (
     <nav className='bg-gray-800'>
@@ -31,10 +31,10 @@ export function Navbar() {
             Job Seeker Profile
           </Link>
 
-          {auth ? (
+          {session ? (
             <button
               onClick={() => {
-                removeAuthSession();
+                removeAuth();
               }}
               className='h-10 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:bg-gray-700'
             >
