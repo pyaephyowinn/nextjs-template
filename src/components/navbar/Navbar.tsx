@@ -1,12 +1,11 @@
 'use client';
 
-import { useAuthSession } from '@/hooks/useAuthSession';
 import { Link } from '@/navigation';
+import { useAuthSession } from '@/store/useAuthSession';
 import LocaleSwitcher from './LocalSwitcher';
 
 export function Navbar() {
-  const { session, removeAuth } = useAuthSession((state) => state);
-  console.log('session', session);
+  const { session, removeAuth } = useAuthSession();
 
   return (
     <nav className='bg-gray-800'>
@@ -18,29 +17,35 @@ export function Navbar() {
         <div className='flex items-center gap-4 justify-center'>
           <LocaleSwitcher />
 
-          <Link
-            href='/employer/profile'
-            className='h-10 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:bg-gray-700'
-          >
-            Employer Profile
-          </Link>
-
-          <Link
-            href='/jobseeker/profile'
-            className='h-10 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:bg-gray-700'
-          >
-            Job Seeker Profile
-          </Link>
-
           {session ? (
-            <button
-              onClick={() => {
-                removeAuth();
-              }}
-              className='h-10 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:bg-gray-700'
-            >
-              logout
-            </button>
+            <>
+              {session?.role === 'employer' && (
+                <Link
+                  href='/employer/profile'
+                  className='h-10 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:bg-gray-700'
+                >
+                  Employer Profile
+                </Link>
+              )}
+
+              {session?.role === 'job-seeker' && (
+                <Link
+                  href='/jobseeker/profile'
+                  className='h-10 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:bg-gray-700'
+                >
+                  Job Seeker Profile
+                </Link>
+              )}
+
+              <button
+                onClick={() => {
+                  removeAuth();
+                }}
+                className='h-10 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:bg-gray-700'
+              >
+                logout
+              </button>
+            </>
           ) : (
             <div className='flex items-center gap-4'>
               <Link

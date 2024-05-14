@@ -3,8 +3,8 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useAuthSession } from '@/hooks/useAuthSession';
 import { Link } from '@/navigation';
+import { useAuthSession } from '@/store/useAuthSession';
 
 export default function Login() {
   const { setAuth } = useAuthSession();
