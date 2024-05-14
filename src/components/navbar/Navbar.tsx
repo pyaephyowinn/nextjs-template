@@ -5,7 +5,8 @@ import { Link } from '@/navigation';
 import LocaleSwitcher from './LocalSwitcher';
 
 export function Navbar() {
-  const { session, removeAuth } = useAuthSession();
+  const { session, removeAuth } = useAuthSession((state) => state);
+  console.log('session', session);
 
   return (
     <nav className='bg-gray-800'>
@@ -25,7 +26,7 @@ export function Navbar() {
           </Link>
 
           <Link
-            href='/job-seeker/profile'
+            href='/jobseeker/profile'
             className='h-10 px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:bg-gray-700'
           >
             Job Seeker Profile

@@ -1,24 +1,25 @@
-// useCookie.js
 import {
   getAuthSession,
   removeAuthSession,
   setAuthSession,
 } from '@/utils/auth';
-import { useState } from 'react';
+import { create } from 'zustand';
 
-export const useAuthSession = () => {
-  const initialAuthSession = getAuthSession();
-  const [session, setSession] = useState(initialAuthSession);
+interface IAuthSession {
+  session: object | null;
+  setAuth: (newValue: object) => void;
+  removeAuth: () => void;
+}
 
-  const setAuth = (newValue: object) => {
-    setSession(newValue);
+export const useAuthSession = create<IAuthSession>((set) => ({
+  session: getAuthSession(),
+
+  setAuth: (newValue: object) => {
     setAuthSession(newValue);
-  };
-
-  const removeAuth = () => {
+    set({ session: newValue });
+  },
+  removeAuth: () => {
     removeAuthSession();
-    setSession(null);
-  };
-
-  return { session, setAuth, removeAuth };
-};
+    set({ session: null });
+  },
+}));
