@@ -2,8 +2,19 @@
   "home": {
     "title": "Hello"
   },
+  "navbar": {
+    "employer-login": "Employer Login",
+    "jobseeker-login": "Login",
+    "employer-profile": "Employer Profile",
+    "jobseeker-profile": "Jobseeker Profile",
+    "logout": "Logout"
+  },
   "LocaleSwitcher": {
     "label": "🇲🇲 Myanmar",
     "locale": "{locale, select, my {🇲🇲 Myanmar} en {🇺🇸 English} other {Unknown}}"
+  },
+  "Login": {
+    "employer-title": "Employer Login",
+    "jobseeker-title": "Login"
   }
 }
