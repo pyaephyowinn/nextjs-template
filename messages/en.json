@@ -9,11 +9,11 @@
     "jobseeker-profile": "Jobseeker Profile",
     "logout": "Logout"
   },
-  "LocaleSwitcher": {
+  "localeSwitcher": {
     "label": "🇲🇲 Myanmar",
     "locale": "{locale, select, my {🇲🇲 Myanmar} en {🇺🇸 English} other {Unknown}}"
   },
-  "Login": {
+  "login": {
     "employer-title": "Employer Login",
     "jobseeker-title": "Login"
   }

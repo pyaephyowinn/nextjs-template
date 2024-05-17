@@ -13,7 +13,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { useTransition } from 'react';
 
 export default function LocaleSwitcher() {
-  const t = useTranslations('LocaleSwitcher');
+  const t = useTranslations('localeSwitcher');
   const locale = useLocale();
   const router = useRouter();
 
